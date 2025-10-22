@@ -11,8 +11,9 @@
     --border-color: #e0e0e0;
     
     /* Typography */
-    --serif-font: 'Cinzel', 'Times New Roman', serif;
+    --serif-font: 'Libre Baskerville', 'Times New Roman', serif;
     --sans-font: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    --heading-font: 'Cinzel', 'Times New Roman', serif;
     --mono-font: 'Inconsolata', 'Courier New', monospace;
     
     /* Layout */
@@ -46,8 +47,8 @@ html, body {
 /* ------ Title Block (Like LaTeX \maketitle) ------ */
 header.title {
     text-align: center;
-    margin-bottom: 3rem;
-    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
     border-bottom: 3px solid var(--border-color);
 }
 
@@ -57,20 +58,40 @@ header.title h1 {
     color: var(--title-color);
     margin-bottom: 0.5rem;
     letter-spacing: -0.01em;
+    font-family: var(--heading-font);
 }
 
 header.title .subtitle {
     font-size: 1.3rem;
     color: var(--emphasis-color);
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     font-weight: 400;
+    font-family: var(--heading-font);
+}
+
+/* Logo styling */
+.header-logo {
+    width: 20%;
+    max-width: 120px;
+    height: auto;
+    margin: 0 auto 1rem auto;
+    display: block;
+}
+
+/* Author info under logo */
+.header-author {
+    font-family: var(--sans-font);
+    font-size: 0.9rem;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
 }
 
 header.title .meta {
     font-family: var(--sans-font);
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: var(--text-color);
-    opacity: 0.8;
+    opacity: 0.7;
 }
 
 /* ------ Abstract Box (Like LaTeX abstract) ------ */
@@ -80,6 +101,13 @@ header.title .meta {
     background: var(--background-color);
     border-left: 4px solid var(--emphasis-color);
     font-style: italic;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.abstract:hover {
+    transform: translateX(4px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .abstract strong {
@@ -89,7 +117,7 @@ header.title .meta {
 
 /* ------ Section Headings (Like LaTeX sections) ------ */
 .section-label {
-    font-family: var(--sans-font);
+    font-family: var(--heading-font);
     font-size: 0.85rem;
     font-weight: 600;
     color: var(--emphasis-color);
@@ -100,7 +128,7 @@ header.title .meta {
 }
 
 h2 {
-    font-family: var(--sans-font);
+    font-family: var(--heading-font);
     font-size: 1.1rem;
     font-weight: 700;
     color: var(--title-color);
@@ -126,23 +154,13 @@ h2 {
     border-left: 4px solid var(--emphasis-color);
 }
 
-/* Different button styles for your 3 main sections */
-.action-item.protocol {
-    background: var(--background-color);
-    color: var(--title-color);
-    border-left-color: #d32f2f; /* Red accent for protocol */
-}
-
-.action-item.newsletter {
-    background: var(--background-color);
-    color: var(--title-color);
-    border-left-color: #1976d2; /* Blue accent for newsletter */
-}
-
+/* Core work buttons - all grey like abstract */
+.action-item.protocol,
+.action-item.newsletter,
 .action-item.book {
     background: var(--background-color);
     color: var(--title-color);
-    border-left-color: #388e3c; /* Green accent for book */
+    border-left-color: var(--emphasis-color);
 }
 
 .action-item.secondary {
@@ -180,7 +198,7 @@ h2 {
 }
 
 .author-section h3 {
-    font-family: var(--sans-font);
+    font-family: var(--heading-font);
     color: var(--title-color);
     margin-bottom: 1rem;
     font-size: 1rem;
@@ -231,6 +249,11 @@ footer a:hover {
     
     header.title .subtitle {
         font-size: 1.1rem;
+    }
+    
+    .header-logo {
+        width: 30%;
+        max-width: 100px;
     }
     
     .button-group {
