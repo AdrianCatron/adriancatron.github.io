@@ -1,0 +1,243 @@
+/* ------ Minimal Academic CSS ------ */
+/* Based on your LaTeX paper style */
+
+:root {
+    /* Color scheme from your LaTeX */
+    --title-color: #282828;
+    --emphasis-color: #3c3c3c;
+    --text-color: #505050;
+    --background-color: #fafafa;
+    --code-background: #f8f8f8;
+    --border-color: #e0e0e0;
+    
+    /* Typography */
+    --serif-font: 'Libre Baskerville', 'Times New Roman', serif;
+    --sans-font: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    --mono-font: 'Inconsolata', 'Courier New', monospace;
+    
+    /* Layout */
+    --max-width: 680px;
+    --page-margin: 2rem;
+}
+
+/* ------ Base Styles ------ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    background: white;
+    color: var(--text-color);
+    font-family: var(--serif-font);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.wrap {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: var(--page-margin);
+}
+
+/* ------ Title Block (Like LaTeX \maketitle) ------ */
+header.title {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 3px solid var(--border-color);
+}
+
+header.title h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--title-color);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+}
+
+header.title .subtitle {
+    font-size: 1.3rem;
+    color: var(--emphasis-color);
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+
+header.title .meta {
+    font-family: var(--sans-font);
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+/* ------ Abstract Box (Like LaTeX abstract) ------ */
+.abstract {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: var(--background-color);
+    border-left: 4px solid var(--emphasis-color);
+    font-style: italic;
+}
+
+.abstract strong {
+    color: var(--title-color);
+    font-style: normal;
+}
+
+/* ------ Section Headings (Like LaTeX sections) ------ */
+.section-label {
+    font-family: var(--sans-font);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--emphasis-color);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 2.5rem 0 1rem 0;
+    text-align: center;
+}
+
+h2 {
+    font-family: var(--sans-font);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--title-color);
+    margin: 2rem 0 1rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+/* ------ Button Groups ------ */
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin: 1.5rem 0 2.5rem 0;
+}
+
+.action-item {
+    display: block;
+    padding: 1rem 1.2rem;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    border-left: 4px solid var(--emphasis-color);
+}
+
+/* Different button styles for your 3 main sections */
+.action-item.protocol {
+    background: var(--background-color);
+    color: var(--title-color);
+    border-left-color: #d32f2f; /* Red accent for protocol */
+}
+
+.action-item.newsletter {
+    background: var(--background-color);
+    color: var(--title-color);
+    border-left-color: #1976d2; /* Blue accent for newsletter */
+}
+
+.action-item.book {
+    background: var(--background-color);
+    color: var(--title-color);
+    border-left-color: #388e3c; /* Green accent for book */
+}
+
+.action-item.secondary {
+    background: white;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-left-color: var(--emphasis-color);
+}
+
+.action-item:hover {
+    transform: translateX(4px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.action-title {
+    font-family: var(--sans-font);
+    font-weight: 600;
+    color: var(--title-color);
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.action-description {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    display: block;
+}
+
+/* ------ Author Section ------ */
+.author-section {
+    margin: 3rem 0;
+    padding: 1.5rem;
+    background: var(--background-color);
+    border-radius: 4px;
+}
+
+.author-section h3 {
+    font-family: var(--sans-font);
+    color: var(--title-color);
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+/* ------ Content Styles ------ */
+p {
+    margin: 1rem 0;
+    font-size: 1rem;
+}
+
+/* MathJax styling */
+.mjx-chtml {
+    font-size: 1.1em !important;
+}
+
+/* ------ Footer ------ */
+footer {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+    font-family: var(--sans-font);
+    font-size: 0.9rem;
+    color: var(--text-color);
+    text-align: center;
+    opacity: 0.7;
+}
+
+footer a {
+    color: var(--emphasis-color);
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* ------ Responsive ------ */
+@media (max-width: 768px) {
+    .wrap {
+        padding: 1.5rem;
+        margin: 0 auto;
+    }
+    
+    header.title h1 {
+        font-size: 1.8rem;
+    }
+    
+    header.title .subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .button-group {
+        gap: 0.6rem;
+    }
+    
+    .action-item {
+        padding: 0.8rem 1rem;
+    }
+}
