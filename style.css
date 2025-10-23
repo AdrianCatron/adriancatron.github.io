@@ -30,18 +30,27 @@
 
 html, body {
     height: 100%;
-    background: white;
+    background-color: white;
     color: var(--text-color);
     font-family: var(--serif-font);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    
+    /* Subtle academic background pattern */
+    background-image: 
+        radial-gradient(circle at 15% 15%, rgba(240, 240, 240, 0.1) 0%, transparent 25%),
+        radial-gradient(circle at 85% 85%, rgba(240, 240, 240, 0.1) 0%, transparent 25%);
+    background-attachment: fixed;
 }
 
 .wrap {
     max-width: var(--max-width);
     margin: 0 auto;
     padding: var(--page-margin);
+    background: white;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.02);
+    position: relative;
 }
 
 /* ------ Title Block (Like LaTeX \maketitle) ------ */
@@ -78,22 +87,6 @@ header.title .subtitle {
     display: block;
 }
 
-/* Author info under logo */
-.header-author {
-    font-family: var(--sans-font);
-    font-size: 0.9rem;
-    color: var(--text-color);
-    margin-bottom: 1.5rem;
-    opacity: 0.8;
-}
-
-header.title .meta {
-    font-family: var(--sans-font);
-    font-size: 0.8rem;
-    color: var(--text-color);
-    opacity: 0.7;
-}
-
 /* ------ Abstract Box (Like LaTeX abstract) ------ */
 .abstract {
     margin: 2rem 0;
@@ -103,6 +96,7 @@ header.title .meta {
     font-style: italic;
     transition: all 0.2s ease;
     cursor: pointer;
+    position: relative;
 }
 
 .abstract:hover {
@@ -110,20 +104,45 @@ header.title .meta {
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
+.paper-title {
+    font-family: var(--heading-font);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--title-color);
+    margin-bottom: 1rem;
+    text-align: center;
+    font-style: normal;
+}
+
 .abstract strong {
     color: var(--title-color);
     font-style: normal;
 }
 
+/* External link indicator for abstract */
+.abstract::after {
+    content: "↗";
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 0.9rem;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+}
+
+.abstract:hover::after {
+    opacity: 0.8;
+}
+
 /* ------ Section Headings (Like LaTeX sections) ------ */
 .section-label {
     font-family: var(--heading-font);
-    font-size: 0.85rem;
+    font-size: 1.7rem;
     font-weight: 600;
     color: var(--emphasis-color);
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin: 2.5rem 0 1rem 0;
+    letter-spacing: 1px;
+    margin: 3rem 0 1.5rem 0;
     text-align: center;
 }
 
@@ -152,6 +171,7 @@ h2 {
     border-radius: 4px;
     transition: all 0.2s ease;
     border-left: 4px solid var(--emphasis-color);
+    position: relative;
 }
 
 /* Core work buttons - all grey like abstract */
@@ -181,12 +201,28 @@ h2 {
     color: var(--title-color);
     display: block;
     margin-bottom: 0.3rem;
+    padding-right: 1.2rem; /* Space for external indicator */
 }
 
 .action-description {
     font-size: 0.9rem;
     opacity: 0.8;
     display: block;
+}
+
+/* External link indicator for action items */
+.action-item::after {
+    content: "↗";
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 0.9rem;
+    opacity: 0.4;
+    transition: opacity 0.2s ease;
+}
+
+.action-item:hover::after {
+    opacity: 0.8;
 }
 
 /* ------ Author Section ------ */
@@ -230,6 +266,17 @@ footer {
 footer a {
     color: var(--emphasis-color);
     text-decoration: none;
+    position: relative;
+    padding-right: 0.8rem;
+}
+
+footer a::after {
+    content: "↗";
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 0.7rem;
+    opacity: 0.5;
 }
 
 footer a:hover {
@@ -256,11 +303,19 @@ footer a:hover {
         max-width: 100px;
     }
     
+    .section-label {
+        font-size: 1.4rem;
+    }
+    
     .button-group {
         gap: 0.6rem;
     }
     
     .action-item {
         padding: 0.8rem 1rem;
+    }
+    
+    body {
+        background-image: none; /* Remove pattern on mobile for performance */
     }
 }
