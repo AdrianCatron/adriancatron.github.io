@@ -53,38 +53,6 @@ html, body {
     position: relative;
 }
 
-/* ------ Introduction Section ------ */
-.introduction-section {
-    text-align: center;
-    margin: 3rem 0 2rem 0;
-    padding-bottom: 2rem;
-    border-bottom: 3px solid var(--border-color);
-}
-
-.introduction-title {
-    font-family: var(--heading-font);
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--title-color);
-    margin-bottom: 0.5rem;
-    letter-spacing: -0.01em;
-}
-
-.introduction-subtitle {
-    font-family: var(--heading-font);
-    font-size: 1.3rem;
-    color: var(--emphasis-color);
-    font-weight: 400;
-}
-
-/* Make logo link subtle */
-.header-logo {
-    transition: opacity 0.2s ease;
-}
-
-.header-logo:hover {
-    opacity: 0.9;
-}
 /* ------ Title Block (Like LaTeX \maketitle) ------ */
 header.title {
     text-align: center;
@@ -117,6 +85,44 @@ header.title .subtitle {
     height: auto;
     margin: 0 auto 1rem auto;
     display: block;
+    transition: opacity 0.2s ease;
+}
+
+.header-logo:hover {
+    opacity: 0.9;
+}
+
+/* ------ Section Headings (Like LaTeX sections) ------ */
+.section-label {
+    font-family: var(--heading-font);
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: var(--emphasis-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 3rem 0 1rem 0;
+    text-align: center;
+}
+
+.section-subtitle {
+    font-family: var(--heading-font);
+    font-size: 1.3rem;
+    color: var(--emphasis-color);
+    text-align: center;
+    margin: -1rem 0 2rem 0;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0.5px;
+}
+
+h2 {
+    font-family: var(--heading-font);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--title-color);
+    margin: 2rem 0 1rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border-color);
 }
 
 /* ------ Abstract Box (Like LaTeX abstract) ------ */
@@ -151,6 +157,18 @@ header.title .subtitle {
     font-style: normal;
 }
 
+/* Fix abstract link styling */
+.abstract-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.abstract-link:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
 /* External link indicator for abstract */
 .abstract::after {
     content: "↗";
@@ -164,28 +182,6 @@ header.title .subtitle {
 
 .abstract:hover::after {
     opacity: 0.8;
-}
-
-/* ------ Section Headings (Like LaTeX sections) ------ */
-.section-label {
-    font-family: var(--heading-font);
-    font-size: 1.7rem;
-    font-weight: 600;
-    color: var(--emphasis-color);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin: 3rem 0 1.5rem 0;
-    text-align: center;
-}
-
-h2 {
-    font-family: var(--heading-font);
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--title-color);
-    margin: 2rem 0 1rem 0;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--border-color);
 }
 
 /* ------ Button Groups ------ */
@@ -337,6 +333,10 @@ footer a:hover {
     
     .section-label {
         font-size: 1.4rem;
+    }
+    
+    .section-subtitle {
+        font-size: 1.1rem;
     }
     
     .button-group {
