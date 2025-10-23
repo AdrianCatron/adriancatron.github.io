@@ -92,7 +92,32 @@ header.title .subtitle {
     opacity: 0.9;
 }
 
-/* ------ Section Headings (Like LaTeX sections) ------ */
+/* ------ Main Title Section ------ */
+.main-title-section {
+    text-align: center;
+    margin: 3rem 0 2rem 0;
+    padding-bottom: 2rem;
+    border-bottom: 3px solid var(--border-color);
+}
+
+.main-title {
+    font-family: var(--heading-font);
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: var(--emphasis-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+}
+
+.main-subtitle {
+    font-family: var(--heading-font);
+    font-size: 1.3rem;
+    color: var(--emphasis-color);
+    font-weight: 400;
+}
+
+/* ------ Section Headings ------ */
 .section-label {
     font-family: var(--heading-font);
     font-size: 1.7rem;
@@ -100,7 +125,7 @@ header.title .subtitle {
     color: var(--emphasis-color);
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin: 3rem 0 1rem 0;
+    margin: 3rem 0 0.5rem 0;
     text-align: center;
 }
 
@@ -109,23 +134,11 @@ header.title .subtitle {
     font-size: 1.3rem;
     color: var(--emphasis-color);
     text-align: center;
-    margin: -1rem 0 2rem 0;
+    margin: 0 0 2rem 0;
     font-weight: 400;
-    text-transform: none;
-    letter-spacing: 0.5px;
 }
 
-h2 {
-    font-family: var(--heading-font);
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--title-color);
-    margin: 2rem 0 1rem 0;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--border-color);
-}
-
-/* ------ Abstract Box (Like LaTeX abstract) ------ */
+/* ------ Abstract Box ------ */
 .abstract {
     margin: 2rem 0;
     padding: 1.5rem;
@@ -229,7 +242,7 @@ h2 {
     color: var(--title-color);
     display: block;
     margin-bottom: 0.3rem;
-    padding-right: 1.2rem; /* Space for external indicator */
+    padding-right: 1.2rem;
 }
 
 .action-description {
@@ -331,6 +344,14 @@ footer a:hover {
         max-width: 100px;
     }
     
+    .main-title {
+        font-size: 1.4rem;
+    }
+    
+    .main-subtitle {
+        font-size: 1.1rem;
+    }
+    
     .section-label {
         font-size: 1.4rem;
     }
@@ -348,6 +369,6 @@ footer a:hover {
     }
     
     body {
-        background-image: none; /* Remove pattern on mobile for performance */
+        background-image: none;
     }
 }
