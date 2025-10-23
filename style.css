@@ -96,7 +96,7 @@ header.title .subtitle {
 .main-title-section {
     text-align: center;
     margin: 3rem 0 2rem 0;
-    padding-bottom: 2rem;
+    padding-bottom: 1.5rem;
     border-bottom: 3px solid var(--border-color);
 }
 
