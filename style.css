@@ -280,7 +280,34 @@ header.title .subtitle {
     margin-bottom: 1rem;
     font-size: 1rem;
 }
+/* Simple Navigation */
+.main-nav {
+    margin-top: 1rem;
+    font-family: var(--sans-font);
+}
 
+.main-nav a {
+    margin: 0 1rem;
+    text-decoration: none;
+    color: var(--emphasis-color);
+    font-weight: 600;
+}
+
+.main-nav a:hover {
+    color: var(--title-color);
+}
+
+/* Form Container */
+.form-container {
+    margin: 2rem 0;
+    background: var(--background-color);
+    padding: 2rem;
+    border-left: 4px solid var(--emphasis-color);
+}
+
+.form-container iframe {
+    border-radius: 4px;
+}
 /* ------ Content Styles ------ */
 p {
     margin: 1rem 0;
