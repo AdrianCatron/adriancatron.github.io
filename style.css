@@ -53,6 +53,38 @@ html, body {
     position: relative;
 }
 
+/* ------ Introduction Section ------ */
+.introduction-section {
+    text-align: center;
+    margin: 3rem 0 2rem 0;
+    padding-bottom: 2rem;
+    border-bottom: 3px solid var(--border-color);
+}
+
+.introduction-title {
+    font-family: var(--heading-font);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--title-color);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+}
+
+.introduction-subtitle {
+    font-family: var(--heading-font);
+    font-size: 1.3rem;
+    color: var(--emphasis-color);
+    font-weight: 400;
+}
+
+/* Make logo link subtle */
+.header-logo {
+    transition: opacity 0.2s ease;
+}
+
+.header-logo:hover {
+    opacity: 0.9;
+}
 /* ------ Title Block (Like LaTeX \maketitle) ------ */
 header.title {
     text-align: center;
