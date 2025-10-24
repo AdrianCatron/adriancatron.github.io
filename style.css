@@ -406,5 +406,26 @@ footer a:hover {
     margin-top: 0.5rem;
     font-size: 0.9rem;
 }
+    /* Philosophy Introduction */
+.philosophy-intro {
+    background: var(--background-color);
+    padding: 1.5rem;
+    border-left: 4px solid var(--emphasis-color);
+    margin: 1rem 0 2rem 0;
+    font-style: italic;
+}
+
+.read-more-link {
+    font-family: var(--sans-font);
+    font-weight: 600;
+    color: var(--emphasis-color);
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+.read-more-link:hover {
+    color: var(--title-color);
+}
 
 }
