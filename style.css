@@ -398,4 +398,13 @@ footer a:hover {
     body {
         background-image: none;
     }
+.action-cta {
+    font-family: var(--sans-font);
+    font-weight: 600;
+    color: var(--emphasis-color);
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}
+
 }
