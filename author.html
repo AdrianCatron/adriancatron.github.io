@@ -85,8 +85,7 @@
       <p>This universal philosophy is developed with the same reasoning system of Coherent AI.</p>
     </div>
 
-
-    <!-- Box 7: Call to Action -->
+<!-- Box 7: Call to Action -->
 <div class="section-label">Call to Action</div>
 <div class="content-box">
   <p>Want to Support, Collaborate, or Learn More?</p>
@@ -94,31 +93,119 @@
 </div>
 
 <nav class="button-group">
-  <a class="action-item secondary" href="#" aria-label="Support the Project">
+  <!-- Support (changed outer wrapper to div to avoid nested anchors) -->
+  <div class="action-item secondary" aria-label="Support the Project">
     <span class="action-title">Support the Project</span>
     <span class="action-description">
-      Contribute directly via cryptocurrency to sustain open-source development and universal philosophy research.
+     
+Support the development of open-source coherent AI and universal philosophy.
+     Contribute directly via cryptocurrency. 
       <br><br>
       <strong>Ethereum:</strong><br>
-      <code id="eth-address">0xb40dD851A10f3c487CA8FC28083eDb3436943443</code>
-      <a href="#" class="copy-link" data-copy="eth-address">Copy</a>
+      <code class="copy-address" data-copy="0xb40dD851A10f3c487CA8FC28083eDb3436943443"
+            role="button" tabindex="0" aria-label="Copy Ethereum address">
+        0xb40dD851A10f3c487CA8FC28083eDb3436943443
+      </code>
+      <span class="copy-feedback" aria-hidden="true"> — Copied!</span>
       <br><br>
       <strong>Bitcoin:</strong><br>
-      <code id="btc-address">[Add your Bitcoin address here]</code>
-      <a href="#" class="copy-link" data-copy="btc-address">Copy</a>
+      <code class="copy-address" data-copy="bc1qttv5x7mljzxgua64fw3c6ue9al42mw5lq24z30"
+            role="button" tabindex="0" aria-label="Copy Bitcoin address">
+        bc1qttv5x7mljzxgua64fw3c6ue9al42mw5lq24z30
+      </code>
+      <span class="copy-feedback" aria-hidden="true"> — Copied!</span>
     </span>
-  </a>
-  
+  </div>
+
   <a class="action-item secondary" href="https://gum.new/gum/cmh2jfk18000004l52x7fhz9z" target="_blank" rel="noopener" aria-label="Download the Book">
     <span class="action-title">Download the Book</span>
     <span class="action-description">Read <em>One Theory About Everything: The Universal Philosophy of Life and Love</em></span>
   </a>
-  
+
   <a class="action-item secondary" href="contact.html" aria-label="Contact Adriaan">
     <span class="action-title">Contact</span>
     <span class="action-description">Get in touch about collaborations, questions, or discussions</span>
   </a>
 </nav>
+
+<style>
+  /* Minimal inline style for clickable addresses and feedback */
+  .copy-address {
+    cursor: pointer;
+    display: inline-block;
+    font-family: monospace;
+    padding: 0;
+    margin-left: 0;
+    text-decoration: none;
+  }
+  .copy-address:focus {
+    outline: 2px solid rgba(0,0,0,0.12);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+  .copy-feedback {
+    opacity: 0;
+    transform: translateY(-2px);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    font-weight: 500;
+    margin-left: 0.3em;
+  }
+  .copy-feedback.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  /* keep code appearance minimal */
+  code {
+    background: none;
+    padding: 0;
+    font-family: monospace;
+  }
+</style>
+
+<script>
+  (function () {
+    const TIMEOUT = 1400; // ms to show "Copied!"
+    document.querySelectorAll('.copy-address').forEach(el => {
+      const feedback = el.nextElementSibling && el.nextElementSibling.classList.contains('copy-feedback')
+        ? el.nextElementSibling
+        : null;
+
+      const doCopy = () => {
+        const text = el.getAttribute('data-copy') || el.textContent.trim();
+        if (!navigator.clipboard) {
+          // fallback
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.position = 'fixed';
+          ta.style.left = '-9999px';
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand('copy'); } catch (e) {}
+          document.body.removeChild(ta);
+        } else {
+          navigator.clipboard.writeText(text).catch(() => {});
+        }
+        if (feedback) {
+          feedback.classList.add('visible');
+          setTimeout(() => feedback.classList.remove('visible'), TIMEOUT);
+        }
+      };
+
+      el.addEventListener('click', e => {
+        e.preventDefault();
+        doCopy();
+      });
+
+      // keyboard accessibility (Enter / Space)
+      el.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+          e.preventDefault();
+          doCopy();
+        }
+      });
+    });
+  })();
+</script>
 
 <style>
   .copy-link {
