@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book — A Theory About Everything</title>
+    <meta name="description" content="A Theory About Everything: The Universal Philosophy of Life and Love. Discover the Ega and find the path to inner peace.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              serif: ['"Libre Baskerville"', 'serif'],
+              sans: ['Inter', 'sans-serif'],
+              display: ['Cinzel', 'serif'],
+            },
+            colors: {
+              latex: {
+                title: '#282828',      // --title-color
+                emphasis: '#3c3c3c',   // --emphasis-color
+                text: '#505050',       // --text-color
+                bg: '#fafafa',         // --background-color (used for blocks)
+                code: '#f8f8f8',       // --code-background
+                border: '#e0e0e0',     // --border-color
+              }
+            }
+          }
+        }
+      }
+    </script>
+
+    <!-- Babel for In-Browser JSX Transformation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Import Map for React & Lucide Icons -->
+    <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.2.0",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+    "lucide-react": "https://esm.sh/lucide-react@0.263.1"
+  }
+}
+</script>
+  </head>
+  <body class="bg-white text-latex-text antialiased selection:bg-gray-200 selection:text-latex-title">
+    <div id="root"></div>
+
+    <!-- Main Application Script -->
+    <script type="text/babel" data-presets="react,typescript" data-type="module">
+      import React, { useState } from 'react';
+      import { createRoot } from 'react-dom/client';
+      import { BookOpen, Heart, Brain, Scale, Globe, Zap, Clock, ArrowRight, Download, ChevronDown, ChevronUp, MessageCircle } from 'lucide-react';
+
+      // --- Components ---
+
+      const Navigation = () => {
+        return (
+          <nav className="flex justify-center flex-wrap gap-4 md:gap-8 py-6 border-b border-latex-border mb-8 font-sans text-sm uppercase tracking-widest font-medium text-latex-text">
+            <a href="index.html" className="hover:text-latex-title hover:underline decoration-1 underline-offset-4 transition-all">Home</a>
+            <a href="book.html" className="text-latex-title underline decoration-1 underline-offset-4 transition-all">The Book</a>
+            <a href="author.html" className="hover:text-latex-title hover:underline decoration-1 underline-offset-4 transition-all">Author</a>
+            <a href="contact.html" className="hover:text-latex-title hover:underline decoration-1 underline-offset-4 transition-all">Contact</a>
+          </nav>
+        );
+      };
+
+      const Section = ({ title, subtitle, children, className = "" }) => {
+        return (
+          <div className={`mb-24 ${className}`}>
+            {(title || subtitle) && (
+              <div className="text-center mb-12">
+                {title && (
+                  <h2 className="font-display text-2xl md:text-3xl font-semibold text-latex-emphasis tracking-wide uppercase mb-2">
+                    {title}
+                  </h2>
+                )}
+                {subtitle && (
+                  <div className="font-display text-lg text-latex-emphasis opacity-80 italic">
+                    {subtitle}
+                  </div>
+                )}
+                <div className="w-16 h-px bg-latex-border mx-auto mt-6"></div>
+              </div>
+            )}
+            {children}
+          </div>
+        );
+      };
+
+      const ActionButton = ({ href, text, primary = false, icon }) => (
+        <a 
+          href={href} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className={`inline-flex items-center gap-3 px-8 py-4 rounded-sm font-sans text-sm font-bold uppercase tracking-widest transition-all duration-300 transform hover:-translate-y-1 ${
+            primary 
+              ? "bg-latex-title text-white shadow-md hover:shadow-xl hover:bg-black" 
+              : "bg-white border border-latex-border text-latex-title shadow-sm hover:shadow-lg"
+          }`}
+        >
+          {icon}
+          <span>{text}</span>
+        </a>
+      );
+
+      const FeatureBox = ({ icon: Icon, title, points }) => (
+        <div className="bg-white border border-latex-border p-8 rounded-sm shadow-sm hover:shadow-md transition-shadow">
+          <div className="flex items-center gap-3 mb-6 border-b border-latex-border pb-4">
+            <Icon className="text-latex-title" size={24} />
+            <h3 className="font-display font-bold text-lg text-latex-title uppercase tracking-wide">{title}</h3>
+          </div>
+          <ul className="space-y-4">
+            {points.map((point, i) => (
+              <li key={i} className="flex items-start gap-3 text-latex-text font-serif">
+                <span className="text-latex-emphasis mt-1.5 w-1.5 h-1.5 bg-latex-emphasis rounded-full shrink-0 block"></span>
+                <span>{point}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+
+      const ChapterItem = ({ icon: Icon, title, description }) => (
+        <div className="flex gap-4 md:gap-6 items-start p-6 hover:bg-latex-bg transition-colors rounded-sm border-b border-latex-border last:border-0">
+          <div className="shrink-0 p-3 bg-white border border-latex-border rounded-full text-latex-title">
+            <Icon size={20} />
+          </div>
+          <div>
+            <h4 className="font-display font-bold text-lg text-latex-title mb-2">{title}</h4>
+            <p className="font-serif text-latex-text leading-relaxed">{description}</p>
+          </div>
+        </div>
+      );
+
+      const QABlock = ({ q, a }) => {
+        const [isOpen, setIsOpen] = useState(false);
+        return (
+          <div className="border-b border-latex-border last:border-0">
+            <button 
+              onClick={() => setIsOpen(!isOpen)}
+              className="w-full text-left py-6 flex justify-between items-center group focus:outline-none"
+            >
+              <h4 className="font-display font-bold text-lg text-latex-title pr-8 group-hover:text-latex-emphasis transition-colors">
+                {q}
+              </h4>
+              <div className="text-gray-400 group-hover:text-latex-title transition-colors">
+                {isOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+              </div>
+            </button>
+            <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-[1000px] opacity-100 mb-6' : 'max-h-0 opacity-0'}`}>
+              <div className="font-serif text-latex-text leading-relaxed pl-4 border-l-2 border-latex-emphasis/20">
+                {a.map((paragraph, i) => (
+                  <p key={i} className="mb-4 last:mb-0">{paragraph}</p>
+                ))}
+              </div>
+            </div>
+          </div>
+        );
+      };
+
+      const App = () => {
+        return (
+          <div className="min-h-screen bg-white relative selection:bg-gray-200 selection:text-latex-title">
+            {/* Background Texture */}
+            <div className="fixed inset-0 pointer-events-none z-0" style={{ 
+              backgroundImage: `radial-gradient(circle at 15% 15%, rgba(240, 240, 240, 0.6) 0%, transparent 25%), radial-gradient(circle at 85% 85%, rgba(240, 240, 240, 0.6) 0%, transparent 25%)`,
+              backgroundAttachment: 'fixed'
+            }}></div>
+
+            <div className="relative z-10 max-w-4xl mx-auto px-6 pb-24">
+              
+              {/* Header */}
+              <header className="pt-12 pb-6 text-center">
+                <a href="index.html" className="inline-block hover:opacity-80 transition-opacity">
+                  <img src="logo.png" alt="Adriaan - Universal Philosopher" className="h-24 md:h-32 mx-auto mb-6" />
+                </a>
+                <h1 className="font-display text-4xl md:text-5xl font-bold text-latex-title mb-2 leading-tight">
+                  A Theory About Everything
+                </h1>
+                <div className="font-display text-lg md:text-xl text-latex-emphasis italic tracking-wide">
+                  The Universal Philosophy of Life and Love
+                </div>
+                <Navigation />
+              </header>
+
+              {/* Hero Hook */}
+              <div className="text-center py-16 md:py-24 border-b border-latex-border">
+                <h2 className="font-display text-2xl md:text-4xl font-bold text-latex-title mb-6 leading-tight max-w-3xl mx-auto">
+                  What If Peace of Mind Wasn’t Something to Chase… But Something to Discover?
+                </h2>
+                <div className="font-serif text-xl md:text-2xl text-latex-text italic max-w-2xl mx-auto mb-10 leading-relaxed opacity-90">
+                  "Stress and anxiety are symptoms of a deeper struggle between reality and your beliefs."
+                </div>
+                <ActionButton 
+                  href="https://gum.new/gum/cmh2jfk18000004l52x7fhz9z" 
+                  text="Download The Book" 
+                  primary={true} 
+                  icon={<Download size={18} />}
+                />
+                <p className="mt-4 font-sans text-xs text-latex-emphasis uppercase tracking-wider opacity-60">Pay what you want</p>
+              </div>
+
+              {/* The Narrative: Problem, Solution, Transformation */}
+              <Section className="mt-24">
+                <div className="grid gap-12">
+                  
+                  {/* The Problem */}
+                  <div className="max-w-3xl mx-auto">
+                    <div className="bg-latex-bg p-8 md:p-12 border-l-4 border-latex-emphasis shadow-sm rounded-r-sm">
+                      <h3 className="font-display font-bold text-xl text-latex-title mb-6 uppercase tracking-widest">The Problem</h3>
+                      <div className="font-serif text-latex-text space-y-4 leading-relaxed text-lg">
+                        <p>You have probably tried to find happiness. Maybe by traveling, buying things, keeping busy, or chasing the next exciting moment. And for a while, it works. But the feeling never lasts.</p>
+                        <p>Why? Because your mind wants constant joy, but reality does not work that way. Your mental construct—your beliefs, expectations, and inherited worldviews—tells you one thing, but life shows you another.</p>
+                        <p className="font-bold text-latex-title">This contradiction keeps you in a cycle of stress and dissatisfaction.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* The Solution */}
+                  <div className="max-w-3xl mx-auto text-center">
+                     <h3 className="font-display text-3xl font-bold text-latex-title mb-2">The Solution</h3>
+                     <p className="font-display italic text-latex-emphasis text-lg mb-8">Discover you are your Ega</p>
+                     
+                     <div className="font-serif text-lg leading-relaxed text-latex-text mb-8">
+                       <p className="mb-4">The answer is not to chase more, but to see and understand differently.</p>
+                       <p>The <strong className="text-latex-title">Ega</strong> is your awareness beneath the mental constructs. It’s not a belief, an identity, or something to achieve. It’s a way of understanding—an expanded state of consciousness that aligns with universal truth and reality.</p>
+                     </div>
+
+                     <div className="grid md:grid-cols-2 gap-6 text-left">
+                       <FeatureBox 
+                          icon={Brain}
+                          title="Mental Construct (Ego)"
+                          points={[
+                            "Resistance to reality",
+                            "Source of stress & anxiety",
+                            "Based on expectations",
+                            "Reactive & Defensive"
+                          ]}
+                       />
+                       <FeatureBox 
+                          icon={Globe}
+                          title="Awareness (Ega)"
+                          points={[
+                            "Observes instead of reacts",
+                            "Aligns with universal truth",
+                            "State of lasting peace",
+                            "Clarity & Freedom"
+                          ]}
+                       />
+                     </div>
+                  </div>
+
+                  {/* The Transformation */}
+                  <div className="max-w-3xl mx-auto">
+                     <div className="border border-latex-border p-8 md:p-12 text-center bg-white shadow-sm">
+                        <h3 className="font-display font-bold text-xl text-latex-title mb-6 uppercase tracking-widest">The Transformation</h3>
+                        <p className="font-serif text-xl italic text-latex-text mb-8">
+                          "Imagine waking up without the usual mental noise."
+                        </p>
+                        <div className="font-serif text-latex-text space-y-4 leading-relaxed text-lg text-left">
+                          <p>When you discover the Ega, you stop chasing happiness and start living from a place of clarity. You become the observer without attachment.</p>
+                          <ul className="space-y-2 mt-4 ml-6 list-disc marker:text-latex-emphasis">
+                            <li>You feel lighter.</li>
+                            <li>You react less and understand more.</li>
+                            <li>You embrace both joy and challenges with balance.</li>
+                            <li>You live with a sense of deep inner peace.</li>
+                          </ul>
+                          <p className="mt-6 font-bold text-latex-title text-center">
+                            Your awareness expands. Your awareness shifts. And life simply makes sense.
+                          </p>
+                        </div>
+                     </div>
+                  </div>
+
+                </div>
+              </Section>
+
+              {/* Book Contents */}
+              <Section title="What You Get Inside" subtitle="A coherent system connecting the biggest questions of life">
+                <div className="max-w-3xl mx-auto bg-white border border-latex-border shadow-sm rounded-sm overflow-hidden">
+                  <ChapterItem 
+                    icon={Heart}
+                    title="What Is Love?"
+                    description="Love is not just an emotion; it’s the driving force of life, a practice we refine every day."
+                  />
+                  <ChapterItem 
+                    icon={Clock}
+                    title="Life, Death & Time"
+                    description="Death isn’t the end; it’s necessary for life to evolve. The past and future are illusions—only the present is real."
+                  />
+                  <ChapterItem 
+                    icon={Scale}
+                    title="Religions & Science"
+                    description="Two different paths seeking the same truth. One through the Ega, the other through discovery."
+                  />
+                  <ChapterItem 
+                    icon={Brain}
+                    title="The Secret Message"
+                    description="Hidden wisdom within ancient texts reveals how we can return to paradise through a new understanding."
+                  />
+                  <ChapterItem 
+                    icon={Zap}
+                    title="Human Sexuality"
+                    description="Exploring the depths of female and male sexuality, linking intensity, meditation, and emotional well-being."
+                  />
+                  <ChapterItem 
+                    icon={Globe}
+                    title="A Theory of Everything"
+                    description="Where the mysteries of quantum physics meet a logical, philosophical solution that explains our reality."
+                  />
+                  <ChapterItem 
+                    icon={Globe}
+                    title="World Peace"
+                    description="A visionary framework for achieving true, lasting global peace through universal coherence."
+                  />
+                </div>
+                
+                <div className="text-center mt-12">
+                   <p className="font-display text-xl font-bold text-latex-title mb-6">Are you ready to see beyond delusions?</p>
+                   <ActionButton 
+                    href="https://gum.new/gum/cmh2jfk18000004l52x7fhz9z" 
+                    text="Start Reading Now" 
+                    primary={true} 
+                    icon={<BookOpen size={18} />}
+                  />
+                </div>
+              </Section>
+
+              {/* Interview Section */}
+              <Section title="Interview with the Philosopher" subtitle="Insights from Adriaan">
+                <div className="max-w-3xl mx-auto">
+                  <QABlock 
+                    q="What inspired you to write A Theory About Everything?"
+                    a={[
+                      "I’ve always been fascinated by life’s biggest questions: Why are we here? What is our purpose? How can we find true happiness and fulfillment?",
+                      "For years, I studied philosophy, spirituality, and science in search of answers. This book is the result of that journey, a culmination of my thoughts and reflections on everything that connects human beings to the universe."
+                    ]}
+                  />
+                  <QABlock 
+                    q="Can you tell us more about the philosophy in your book?"
+                    a={[
+                      "A Theory About Everything presents a universal philosophy of life, a coherent system that bridges science, spirituality, and philosophy.",
+                      "At its core is the discovery of the Ega, the natural, hidden counterpart of the ego. While the ego is our mental construct, shaped by society and survival instincts, the Ega is our deeper consciousness, our connection to the universe. It is what we really are.",
+                      "This philosophy provides a clear and structured way to live with purpose, peace, and meaning, aligning with yourself, your surroundings, and universal truth."
+                    ]}
+                  />
+                  <QABlock 
+                    q="Who would benefit most from reading your book?"
+                    a={[
+                      "Anyone seeking a fuller, more meaningful life.",
+                      "The book is written in an accessible style, offering deep questions and simple, practical answers. It provides a system of thought that aligns with the universe, helping readers find inner peace and clarity."
+                    ]}
+                  />
+                  <QABlock 
+                    q="How does your philosophy differ from other self-help books?"
+                    a={[
+                      "Most self-help books focus on quick fixes changing behaviors or developing new habits. But A Theory About Everything goes deeper.",
+                      "It integrates philosophy, science, spirituality, and self-awareness into a holistic system. The discovery of the Ega is a transformational experience. It is not about following steps, it is about shifting the way you see reality."
+                    ]}
+                  />
+                  <QABlock 
+                    q="Can you share a key conclusion from the book?"
+                    a={[
+                      "A central idea is that we are all interconnected—to each other, to the universe, and to everything that exists.",
+                      "The Ega is our soul, our intuition, emotions, ambitions, empathy, everything beyond logic. The ego is our own construct, trying to make sense of reality. But true harmony comes when we balance the two allowing the Ega to guide us while using the ego as a tool, not a master."
+                    ]}
+                  />
+                  <QABlock 
+                    q="What is the meaning of life, according to your theory?"
+                    a={[
+                      "The meaning of life is personal, something each person must define for themselves. But, there is a general principle: The meaning of life is to give your life meaning, and you give meaning to your life by contributing or advancing the evolution of life.",
+                      "Common themes emerge: love, connection, and contribution. True fulfillment comes from living authentically, in alignment with your values and purpose, rather than chasing fleeting happiness."
+                    ]}
+                  />
+                </div>
+              </Section>
+
+              {/* Final Call to Action */}
+              <div className="bg-latex-bg border-y border-latex-border py-20 text-center mb-24 -mx-6 md:-mx-0 md:rounded-sm md:border">
+                <div className="max-w-2xl mx-auto px-6">
+                  <h2 className="font-display text-3xl font-bold text-latex-title mb-6">Your Journey Starts Now</h2>
+                  <p className="font-serif text-lg text-latex-text mb-8 leading-relaxed">
+                    The answers you have been searching for are not somewhere "out there." They have always been within you. Gain clarity, break free from limiting beliefs, and align with universal truth.
+                  </p>
+                  <ActionButton 
+                    href="https://gum.new/gum/cmh2jfk18000004l52x7fhz9z" 
+                    text="Get Instant Access" 
+                    primary={true} 
+                    icon={<Download size={18} />}
+                  />
+                  <p className="mt-6 text-sm font-sans text-latex-emphasis opacity-60">Pay what you want • Secure Download via Gumroad</p>
+                </div>
+              </div>
+
+              {/* Footer */}
+              <footer className="mt-32 border-t border-latex-border pt-12 text-center text-latex-text opacity-70 font-sans text-sm">
+                <div className="flex justify-center gap-6 mb-8 uppercase tracking-widest text-xs font-semibold">
+                   <a href="index.html" className="hover:text-latex-title transition-colors">Home</a>
+                   <a href="author.html" className="hover:text-latex-title transition-colors">Author</a>
+                   <a href="contact.html" className="hover:text-latex-title transition-colors">Contact</a>
+                </div>
+                <p className="font-serif italic">
+                  © 2025 Adriaan — Designing the architecture of reliable reasoning
+                </p>
+              </footer>
+
+            </div>
+          </div>
+        );
+      };
+
+      const root = createRoot(document.getElementById('root'));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
