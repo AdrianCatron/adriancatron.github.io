@@ -192,12 +192,12 @@
                 <Navigation />
               </header>
 
-              {/* Book Cover Placement */}
-              <div className="flex justify-center mb-16 -mt-4">
+              {/* Book Cover Placement - Full Width */}
+              <div className="flex justify-center mb-16 -mt-4 max-w-3xl mx-auto">
                  <img 
                     src="book.png" 
                     alt="A Theory About Everything Book Cover" 
-                    className="w-full max-w-[350px] md:max-w-md h-auto shadow-2xl rounded-sm transform hover:scale-[1.02] transition-transform duration-500" 
+                    className="w-full h-auto shadow-2xl rounded-sm transform hover:scale-[1.01] transition-transform duration-500" 
                  />
               </div>
 
@@ -210,7 +210,7 @@
                   "Stress and anxiety are symptoms of a deeper struggle between reality and your beliefs."
                 </div>
                 <ActionButton 
-                  href="https://gum.new/gum/cmh2jfk18000004l52x7fhz9z" 
+                  href="https://adriaanphilosopher.gumroad.com/l/cnhzr" 
                   text="Download The Book" 
                   primary={true} 
                   icon={<Download size={18} />}
@@ -341,7 +341,7 @@
                 <div className="text-center mt-12">
                    <p className="font-display text-xl font-bold text-latex-title mb-6">Are you ready to see beyond delusions?</p>
                    <ActionButton 
-                    href="https://gum.new/gum/cmh2jfk18000004l52x7fhz9z" 
+                    href="https://adriaanphilosopher.gumroad.com/l/cnhzr" 
                     text="Start Reading Now" 
                     primary={true} 
                     icon={<BookOpen size={18} />}
@@ -406,7 +406,7 @@
                     The answers you have been searching for are not somewhere "out there." They have always been within you. Gain clarity, break free from limiting beliefs, and align with universal truth.
                   </p>
                   <ActionButton 
-                    href="https://gum.new/gum/cmh2jfk18000004l52x7fhz9z" 
+                    href="https://adriaanphilosopher.gumroad.com/l/cnhzr" 
                     text="Get Instant Access" 
                     primary={true} 
                     icon={<Download size={18} />}
@@ -416,14 +416,16 @@
               </div>
 
               {/* Footer */}
-              <footer className="mt-32 border-t border-latex-border pt-12 text-center text-latex-text opacity-70 font-sans text-sm">
-                <div className="flex justify-center gap-6 mb-8 uppercase tracking-widest text-xs font-semibold">
-                   <a href="index.html" className="hover:text-latex-title transition-colors">Home</a>
-                   <a href="author.html" className="hover:text-latex-title transition-colors">Author</a>
-                   <a href="contact.html" className="hover:text-latex-title transition-colors">Contact</a>
+              <footer className="mt-32 border-t border-latex-border pt-12 pb-12 text-center text-latex-text opacity-70 font-sans text-sm">
+                <div className="flex flex-wrap justify-center gap-6 mb-8 uppercase tracking-widest text-xs font-semibold">
+                  <a href="https://huggingface.co/spaces/AdriaanPhilosopher/Reason.Engine" className="hover:text-latex-title transition-colors">HuggingFace</a>
+                  <a href="https://poe.com/Coherent.AI" className="hover:text-latex-title transition-colors">Coherent AI</a>
+                  <a href="https://adriaanphilosopher.gumroad.com/l/cnhzr" className="hover:text-latex-title transition-colors">Book</a>
+                  <a href="https://onetheory.substack.com/" className="hover:text-latex-title transition-colors">Newsletter</a>
+                  <a href="https://zenodo.org/records/17410129" className="hover:text-latex-title transition-colors">Paper</a>
                 </div>
                 <p className="font-serif italic">
-                  © 2025 Adriaan — Designing the architecture of reliable reasoning
+                  © 2025 Adriaan — Exploring the architecture of reliable reasoning
                 </p>
               </footer>
 
