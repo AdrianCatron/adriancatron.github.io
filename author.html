@@ -60,14 +60,15 @@
       import { createRoot } from 'react-dom/client';
       import { BookOpen, Heart, Globe, Sparkles, Download, ExternalLink, Copy, Check, CreditCard, ArrowUpRight, Mail } from 'lucide-react';
 
-      // --- Components (Reused from index.html for consistency) ---
+      // --- Components ---
 
       // 1. Navigation
       const Navigation = () => {
         return (
           <nav className="flex justify-center space-x-8 py-6 border-b border-latex-border mb-8 font-sans text-sm uppercase tracking-widest font-medium text-latex-text">
             <a href="index.html" className="hover:text-latex-title hover:underline decoration-1 underline-offset-4 transition-all">Home</a>
-            <a href="author.html" className="hover:text-latex-title hover:underline decoration-1 underline-offset-4 transition-all text-latex-title underline">Author</a>
+            <a href="author.html" className="text-latex-title underline decoration-1 underline-offset-4 transition-all">Author</a>
+            <a href="book.html" className="hover:text-latex-title hover:underline decoration-1 underline-offset-4 transition-all">Book</a>
             <a href="contact.html" className="hover:text-latex-title hover:underline decoration-1 underline-offset-4 transition-all">Contact</a>
           </nav>
         );
@@ -329,11 +330,15 @@
 
               {/* Footer */}
               <footer className="mt-32 border-t border-latex-border pt-12 pb-12 text-center text-latex-text opacity-70 font-sans text-sm">
-                <a href="index.html" className="inline-flex items-center hover:text-latex-title transition-colors mb-4 font-semibold uppercase tracking-widest text-xs">
-                  ← Back to Home
-                </a>
+                <div className="flex flex-wrap justify-center gap-6 mb-8 uppercase tracking-widest text-xs font-semibold">
+                  <a href="https://huggingface.co/spaces/AdriaanPhilosopher/Reason.Engine" className="hover:text-latex-title transition-colors">HuggingFace</a>
+                  <a href="https://poe.com/Coherent.AI" className="hover:text-latex-title transition-colors">Coherent AI</a>
+                  <a href="https://gum.new/gum/cmh2jfk18000004l52x7fhz9z" className="hover:text-latex-title transition-colors">Book</a>
+                  <a href="https://onetheory.substack.com/" className="hover:text-latex-title transition-colors">Newsletter</a>
+                  <a href="https://zenodo.org/records/17410129" className="hover:text-latex-title transition-colors">Paper</a>
+                </div>
                 <p className="font-serif italic">
-                  © 2025 Adriaan — Designing the architecture of reliable reasoning
+                  © 2025 Adriaan — Exploring the architecture of reliable reasoning
                 </p>
               </footer>
             </div>
