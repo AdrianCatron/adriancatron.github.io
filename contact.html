@@ -1,57 +1,177 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Contact — A Theory About Everything</title>
-
-  <!-- Meta Tags -->
-  <meta name="description" content="Contact Adriaan about Coherent AI, Universal Philosophy, and alignment protocols">
-  
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-  <div class="wrap">
-    <header class="title">
-      <h1>A Theory About Everything</h1>
-      <div class="subtitle">The Universal Philosophy of Life and Love</div>
-      
-      <a href="https://adriaanphilosopher.gumroad.com/l/cnhzr" target="_blank" rel="noopener">
-        <img src="logo.png" alt="Adriaan - Universal Philosopher" class="header-logo">
-      </a>
-      
-     <!-- Navigation -->
-      <nav class="main-nav">
-        <a href="index.html">Home</a>
-        <a href="author.html">Author</a>
-        <a href="contact.html">Contact</a>
-      </nav>    </header>
-
-    <!-- Contact Section -->
-    <div class="main-title-section">
-      <div class="main-title">Contact</div>
-      <div class="main-subtitle">Get in touch </div>
-    </div>
-
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact — A Theory About Everything</title>
+    <meta name="description" content="Contact Adriaan about Coherent AI, Universal Philosophy, and alignment protocols">
     
-    <!-- Google Form -->
-    <div class="form-container">
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScg9ISA6Gre_jWNY-n8Wj5jCABgqwgoDBDmjtglSGBiQIlPDw/viewform?embedded=true" 
-        width="100%" height="800" frameborder="0" marginheight="0" marginwidth="0">
-  Loading contact form...
-</iframe>    </div>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              serif: ['"Libre Baskerville"', 'serif'],
+              sans: ['Inter', 'sans-serif'],
+              display: ['Cinzel', 'serif'],
+            },
+            colors: {
+              latex: {
+                title: '#282828',      // --title-color
+                emphasis: '#3c3c3c',   // --emphasis-color
+                text: '#505050',       // --text-color
+                bg: '#fafafa',         // --background-color (used for blocks)
+                code: '#f8f8f8',       // --code-background
+                border: '#e0e0e0',     // --border-color
+              }
+            }
+          }
+        }
+      }
+    </script>
 
-    <footer>
-      <div style="margin-bottom: 1rem;">
-        <a href="index.html">← Back to Home</a>
-      </div>
-      © 2025 Adriaan — Exploring the architecture of reliable reasoning
-    </footer>
-  </div>
-</body>
+    <!-- Babel for In-Browser JSX Transformation -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Import Map for React & Lucide Icons -->
+    <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.2.0",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+    "lucide-react": "https://esm.sh/lucide-react@0.263.1"
+  }
+}
+</script>
+  </head>
+  <body class="bg-white text-latex-text antialiased selection:bg-gray-200 selection:text-latex-title">
+    <div id="root"></div>
+
+    <!-- Main Application Script -->
+    <script type="text/babel" data-presets="react,typescript" data-type="module">
+      import React from 'react';
+      import { createRoot } from 'react-dom/client';
+      import { Mail } from 'lucide-react';
+
+      // --- Components ---
+
+      // 1. Navigation
+      const Navigation = () => {
+        return (
+          <nav className="flex justify-center space-x-8 py-6 border-b border-latex-border mb-8 font-sans text-sm uppercase tracking-widest font-medium text-latex-text">
+            <a href="index.html" className="hover:text-latex-title hover:underline decoration-1 underline-offset-4 transition-all">Home</a>
+            <a href="author.html" className="hover:text-latex-title hover:underline decoration-1 underline-offset-4 transition-all">Author</a>
+            <a href="book.html" className="hover:text-latex-title hover:underline decoration-1 underline-offset-4 transition-all">Book</a>
+            <a href="contact.html" className="text-latex-title underline decoration-1 underline-offset-4 transition-all">Contact</a>
+          </nav>
+        );
+      };
+
+      // 2. Section
+      const Section = ({ title, subtitle, children, className = "" }) => {
+        return (
+          <div className={`mb-24 ${className}`}>
+            {(title || subtitle) && (
+              <div className="text-center mb-12">
+                {title && (
+                  <h2 className="font-display text-2xl md:text-3xl font-semibold text-latex-emphasis tracking-wide uppercase mb-2">
+                    {title}
+                  </h2>
+                )}
+                {subtitle && (
+                  <div className="font-display text-lg text-latex-emphasis opacity-80 italic">
+                    {subtitle}
+                  </div>
+                )}
+                <div className="w-16 h-px bg-latex-border mx-auto mt-6"></div>
+              </div>
+            )}
+            {children}
+          </div>
+        );
+      };
+
+      // --- Main App ---
+      const App = () => {
+        return (
+          <div className="min-h-screen bg-white relative selection:bg-gray-200 selection:text-latex-title">
+            {/* Background Radial Gradient */}
+            <div className="fixed inset-0 pointer-events-none z-0" style={{ 
+              backgroundImage: `radial-gradient(circle at 15% 15%, rgba(240, 240, 240, 0.6) 0%, transparent 25%), radial-gradient(circle at 85% 85%, rgba(240, 240, 240, 0.6) 0%, transparent 25%)`,
+              backgroundAttachment: 'fixed'
+            }}></div>
+            
+            <div className="relative z-10 max-w-4xl mx-auto px-6 pb-24">
+              
+              {/* Header */}
+              <header className="pt-12 pb-6 text-center">
+                <a href="https://adriaanphilosopher.gumroad.com/l/cnhzr" target="_blank" rel="noopener noreferrer" className="inline-block hover:opacity-80 transition-opacity">
+                  <img src="logo.png" alt="Adriaan - Universal Philosopher" className="h-24 md:h-32 mx-auto mb-6" />
+                </a>
+                <h1 className="font-display text-4xl md:text-5xl font-bold text-latex-title mb-2 leading-tight">
+                  A Theory About Everything
+                </h1>
+                <div className="font-display text-lg md:text-xl text-latex-emphasis italic tracking-wide">
+                  The Universal Philosophy of Life and Love
+                </div>
+                <Navigation />
+              </header>
+
+              {/* Contact Section */}
+              <Section title="Contact" subtitle="Get in Touch" className="max-w-3xl mx-auto">
+                
+                <div className="bg-white border border-latex-border rounded-sm shadow-sm overflow-hidden p-1 bg-latex-bg">
+                  <div className="bg-white p-2 md:p-4">
+                    <iframe 
+                      src="https://docs.google.com/forms/d/e/1FAIpQLScg9ISA6Gre_jWNY-n8Wj5jCABgqwgoDBDmjtglSGBiQIlPDw/viewform?embedded=true" 
+                      width="100%" 
+                      height="800" 
+                      frameBorder="0" 
+                      marginHeight="0" 
+                      marginWidth="0"
+                      className="w-full"
+                    >
+                      Loading contact form...
+                    </iframe>
+                  </div>
+                </div>
+
+                <div className="mt-12 text-center max-w-xl mx-auto">
+                  <p className="font-serif text-latex-text italic">
+                    "I believe in the power of three eternal processes: the acquisition of knowledge, the search for beauty, and the pursuit of truth."
+                  </p>
+                </div>
+
+              </Section>
+
+              {/* Footer */}
+              <footer className="mt-32 border-t border-latex-border pt-12 pb-12 text-center text-latex-text opacity-70 font-sans text-sm">
+                <div className="flex flex-wrap justify-center gap-6 mb-8 uppercase tracking-widest text-xs font-semibold">
+                  <a href="https://huggingface.co/spaces/AdriaanPhilosopher/Reason.Engine" className="hover:text-latex-title transition-colors">HuggingFace</a>
+                  <a href="https://poe.com/Coherent.AI" className="hover:text-latex-title transition-colors">Coherent AI</a>
+                  <a href="https://adriaanphilosopher.gumroad.com/l/cnhzr" className="hover:text-latex-title transition-colors">Book</a>
+                  <a href="https://onetheory.substack.com/" className="hover:text-latex-title transition-colors">Newsletter</a>
+                  <a href="https://zenodo.org/records/17410129" className="hover:text-latex-title transition-colors">Paper</a>
+                </div>
+                <p className="font-serif italic">
+                  © 2025 Adriaan — Exploring the architecture of reliable reasoning
+                </p>
+              </footer>
+            </div>
+          </div>
+        );
+      };
+
+      // Mount the app
+      const root = createRoot(document.getElementById('root'));
+      root.render(<App />);
+    </script>
+  </body>
 </html>
